@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f1">
+  <title>TIC TAC TOE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="intro" class="intro" aria-label="Tic Tac Toe intro">
+    <div class="intro-inner">
+      <div class="intro-board" aria-hidden="true">
+        <span class="intro-mark mark-x">×</span><span></span><span class="intro-mark mark-o">○</span>
+        <span></span><span class="intro-mark mark-x">×</span><span></span>
+        <span class="intro-mark mark-o">○</span><span></span><span class="intro-mark mark-x">×</span>
+      </div>
+      <p class="intro-kicker">A LITTLE FRIENDLY COMPETITION</p>
+      <h1 class="intro-title"><span>TIC</span> <span>TAC</span> <span>TOE</span></h1>
+      <div class="intro-rule"></div>
+      <p class="intro-byline">DEVELOPED BY <strong>MOHAMMED WASI</strong></p>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Tic Tac Toe home">
+        <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+        <span>TIC TAC TOE</span>
+      </a>
+      <div class="topbar-right">
+        <span class="online-dot"></span><span class="muted small">QUICK PLAY</span>
+        <button id="change-name" class="text-button hidden" type="button">Edit profile</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home-screen" class="screen home-screen">
+        <div class="home-copy">
+          <span class="eyebrow">THE CLASSIC, REMADE</span>
+          <h1>Good games.<br><span>Good company.</span></h1>
+          <p class="lead">A quick round with a friend or someone new. Pick a name and play.</p>
+          <button id="open-play" class="button button-primary" type="button">Start playing <span>↗</span></button>
+        </div>
+        <div class="home-art">
+          <div class="art-label label-top">YOUR MOVE</div>
+          <div class="hero-board" aria-hidden="true">
+            <div class="hero-cell x">×</div><div class="hero-cell"></div><div class="hero-cell o">○</div>
+            <div class="hero-cell"></div><div class="hero-cell x">×</div><div class="hero-cell"></div>
+            <div class="hero-cell o">○</div><div class="hero-cell"></div><div class="hero-cell x">×</div>
+            <svg class="hero-win-line" viewBox="0 0 300 300" aria-hidden="true"><path d="M50 50 L150 150 L250 250"/></svg>
+          </div>
+          <div class="art-label label-bottom"><span class="online-dot"></span> MADE FOR A QUICK BREAK</div>
+        </div>
+      </section>
+
+      <section id="lobby-screen" class="screen hidden">
+        <div class="page-heading">
+          <div><span class="eyebrow">THE LOBBY</span><h1>Ready when<br>you are, <span id="hello-name">friend</span>.</h1></div>
+          <div class="avatar" id="avatar">W</div>
+        </div>
+        <p class="lead lobby-lead">Choose your next move. Your next game is just a few taps away.</p>
+        <div class="lobby-grid">
+          <button id="quick-match" class="mode-card featured" type="button">
+            <span class="mode-icon shuffle-icon">↔</span><span class="mode-title">Quick match</span>
+            <span class="mode-description">Find an online player and jump straight in.</span>
+            <span class="mode-link">Find a match <b>↗</b></span>
+          </button>
+          <button id="create-room" class="mode-card" type="button">
+            <span class="mode-icon">＋</span><span class="mode-title">Create a room</span>
+            <span class="mode-description">Make a private room and invite a friend.</span>
+            <span class="mode-link">Create room <b>↗</b></span>
+          </button>
+          <div class="join-card">
+            <div class="join-card-head"><span class="mode-icon small-icon">⌁</span><div><span class="mode-title">Join with a code</span><p class="mode-description">Enter the six-character code your friend shared.</p></div></div>
+            <form id="join-form" class="join-form">
+              <label class="sr-only" for="room-code">Room code</label>
+              <input id="room-code" maxlength="6" placeholder="ENTER CODE" autocomplete="off" spellcheck="false">
+              <button class="button button-dark" type="submit">Join room</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="waiting-screen" class="screen hidden">
+        <div class="waiting-card">
+          <button class="back-button" id="cancel-wait" type="button">← Back to lobby</button>
+          <div class="matchmaking-visual" aria-hidden="true">
+            <div class="scan-ring ring-one"></div><div class="scan-ring ring-two"></div>
+            <div class="scan-center"><span class="scan-x">×</span><span class="scan-o">○</span></div>
+          </div>
+          <span class="eyebrow" id="waiting-eyebrow">MATCHMAKING</span>
+          <h1 id="waiting-title">Finding your<br>next opponent.</h1>
+          <p id="waiting-description" class="lead">Searching for another player. This can take a little moment.</p>
+          <div class="room-code-block hidden" id="room-code-block"><span>ROOM CODE</span><div><strong id="room-code-display">ABC123</strong><button id="copy-code" class="copy-button" type="button">Copy code</button></div><p>Share this code with a friend to start the match.</p></div>
+          <div class="search-progress"><span id="search-progress-bar"></span></div>
+          <div class="waiting-status"><span class="pulse-dot"></span><span id="waiting-status-text">Connecting to matchmaking…</span><strong id="search-time">00:00</strong></div>
+          <p id="waiting-hint" class="waiting-hint">Keep this page open while we look.</p>
+        </div>
+      </section>
+
+      <section id="game-screen" class="screen game-screen hidden">
+        <div class="game-topline"><button id="leave-game" class="back-button" type="button">← Leave game</button><span class="match-pill"><span class="online-dot"></span> LIVE MATCH</span></div>
+        <div class="game-heading"><span class="eyebrow" id="game-room-label">QUICK MATCH</span><h1 id="game-status">Your turn.</h1><p id="game-substatus" class="muted">Make it count.</p></div>
+        <div class="players-row">
+          <div class="player-chip" id="player-x"><span class="player-symbol x-symbol">×</span><span class="player-details"><strong id="player-x-name">Player X</strong><small>PLAYER X</small></span><span class="turn-tag" id="x-turn-tag">YOUR TURN</span></div>
+          <span class="versus">VS</span>
+          <div class="player-chip" id="player-o"><span class="player-symbol o-symbol">○</span><span class="player-details"><strong id="player-o-name">Player O</strong><small>PLAYER O</small></span><span class="turn-tag" id="o-turn-tag">YOUR TURN</span></div>
+        </div>
+        <div class="board-wrap">
+          <div id="board" class="board" role="grid" aria-label="Tic-tac-toe board">
+            <button class="cell" data-cell="0" aria-label="Row 1, column 1"></button><button class="cell" data-cell="1" aria-label="Row 1, column 2"></button><button class="cell" data-cell="2" aria-label="Row 1, column 3"></button>
+            <button class="cell" data-cell="3" aria-label="Row 2, column 1"></button><button class="cell" data-cell="4" aria-label="Row 2, column 2"></button><button class="cell" data-cell="5" aria-label="Row 2, column 3"></button>
+            <button class="cell" data-cell="6" aria-label="Row 3, column 1"></button><button class="cell" data-cell="7" aria-label="Row 3, column 2"></button><button class="cell" data-cell="8" aria-label="Row 3, column 3"></button>
+            <svg id="win-line" class="win-line" viewBox="0 0 300 300" aria-hidden="true"><path id="win-line-path" d=""/></svg>
+          </div>
+        </div>
+        <div class="game-bottom"><span><span class="tiny-check">✓</span> Three in a row wins</span><button id="copy-game-code" class="text-button hidden" type="button">ROOM CODE <b id="game-code-text">ABC123</b> ↗</button></div>
+      </section>
+
+      <section id="result-screen" class="screen result-screen hidden">
+        <div class="result-card">
+          <div class="confetti-field" id="confetti-field" aria-hidden="true"></div>
+          <div class="result-symbol" id="result-symbol">×</div>
+          <span class="eyebrow">ROUND COMPLETE</span><h1 id="result-title">Nicely played.</h1>
+          <p id="result-description" class="lead">A good match is always worth another round.</p>
+          <div class="result-score"><div><strong id="result-x-name">Player X</strong><span id="result-x-score">PLAYER X</span></div><span class="score-divider">—</span><div><strong id="result-o-name">Player O</strong><span id="result-o-score">PLAYER O</span></div></div>
+          <button id="play-again" class="button button-primary full" type="button">Play another round <span>↗</span></button>
+          <button id="back-lobby" class="button button-quiet full" type="button">Back to lobby</button>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"><span>TIC TAC TOE <span class="footer-dot">·</span> DEVELOPED BY MOHAMMED WASI</span><span>PLAY NICE ✳</span></footer>
+  </div>
+
+  <!-- One custom modal system is used for name entry, privacy, and all confirmations. -->
+  <div id="dialog-backdrop" class="dialog-backdrop hidden" role="presentation">
+    <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" aria-describedby="dialog-message">
+      <button id="dialog-close" class="dialog-close" type="button" aria-label="Close dialog">×</button>
+      <div id="dialog-icon" class="dialog-icon">✳</div>
+      <h2 id="dialog-title">Welcome</h2>
+      <div id="dialog-message" class="dialog-message">Let's get you into a game.</div>
+      <div id="dialog-actions" class="dialog-actions"></div>
+    </section>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
